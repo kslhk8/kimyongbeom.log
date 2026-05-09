@@ -1,12 +1,10 @@
 import createMDX from "@next/mdx";
-import remarkGfm from "remark-gfm";
-import rehypePrettyCode from "rehype-pretty-code";
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypePrettyCode],
+    remarkPlugins: ["remark-gfm"],
+    rehypePlugins: [["rehype-pretty-code", {}]],
   },
 });
 
