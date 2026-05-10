@@ -4,7 +4,15 @@ const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: ["remark-gfm"],
-    rehypePlugins: [["rehype-pretty-code", {}]],
+    rehypePlugins: [
+      [
+        "rehype-pretty-code",
+        {
+          theme: "catppuccin-latte",
+          keepBackground: false,
+        },
+      ],
+    ],
   },
 });
 

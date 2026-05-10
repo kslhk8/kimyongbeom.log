@@ -127,3 +127,6 @@ body {
 .border-default {
   border-color: rgba(228, 228, 231, 0.8);
 }
+.divide-default {
+  color:#e4e4e7cc
+}
