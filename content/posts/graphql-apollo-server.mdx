@@ -1,0 +1,50 @@
+export const metadata = {
+  title: "GraphQL-3",
+  description: "",
+  date: "2022-04-27",
+  category: "JavaScript",
+  tags: ["GraphQL", "Apollo Server", "TypeDefs", "Resolvers"],
+  published: true,
+};
+
+#### apollographql   
+프론트와 서버를 모두 제공하는 라이브러리   
+   
+##### 세팅   
+```
+npm init --yes
+
+npm install apollo-server graphql
+```
+   
+##### nodemon   
+실시간 데이터 변경   
+```
+npm install nodemon
+"start":"nodemon index.js"
+```
+   
+##### 스키마   
+서버와 클라이언트가 주고 받을 데이터 형식을 정의한 약속
+database, service, API등
+   
+##### typeDefs   
+GraphQL 명세에서 사용될 데이터, 요청의 타입 지정   
+gql(template literal tag)로 생성됨    
+   
+##### resolvers   
+서비스의 액션들을 함수로 지정     
+
+요청에 따라 데이터 반환, 입력, 수정, 삭제   
+   
+##### 서버 구성요소 모듈화   
+typeefs-resolvers(폴더)      
+ _mutations.js - mutation에 대한 typeDefs 모음   
+ _queries.js - query에 대한 typeDefs 모음   
+ sample.js - sample에 대한 typeDefs와 resolvers 모음   
+   
+index.js   
+```
+const typeDefs = [ queries, mutations, sample.typeDefs];
+const resolvers = [sample.resolvers];
+```

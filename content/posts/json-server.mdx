@@ -1,0 +1,93 @@
+export const metadata = {
+  title: "JSON Server와 JSON Server Auth",
+  description:
+    "",
+  date: "2023-09-07",
+  category: "JavaScript",
+  tags: [
+    "JSON Server",
+    "JSON Server Auth",
+  ],
+  published: true,
+};
+
+##### JSON Server
+
+json파일을 사용하여 Rest API Mock server를 구축할 수 있다.
+
+```
+yarn add json-server
+yarn json-server --watch db.json
+
+or
+
+npx json-server --watch db.json
+```
+
+##### GET 방식
+
+```
+axios.get('http://localhost:9999/boards')
+```
+
+##### POST 방식
+
+```
+axios.post('http://localhost:3000/boards', params)
+```
+
+##### PATCH 방식
+
+```
+axios.patch(`http://localhost:3000/boards/${id}`, params)
+```
+
+##### DELETE 방식
+
+```
+axios.delete(`http://localhost:3000/boards/${id}`)
+```
+
+patch, delete의 경우 id를 기준으로 작동함
+
+##### JSON Server Auth
+
+JSON 서버용으로 만들어진 JWT 인증 미들웨어
+
+```
+yarn add json-server-auth
+
+yarn json-server-auth db.json
+```
+
+##### 회원가입
+
+POST /register  
+reqeust body에 email, password를 담아서 요청하면 회원가입 진행
+
+```
+//response
+{
+  "accessToken": "xxx.xxx.xxx",
+  "user": {
+    "id": 1,
+    "email": "test@gmail.com"
+  }
+}
+```
+
+##### 로그인
+
+POST /login
+request body에 email, password를 담아서 요청하면 로그인 진행
+
+```
+//response
+{
+  "accessToken": "xxx.xxx.xxx",
+  "user": {
+    "id": 1,
+    "email": "test@gmail.com",
+  }
+}
+```

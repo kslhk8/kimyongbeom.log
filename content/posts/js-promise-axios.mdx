@@ -1,0 +1,96 @@
+export const metadata = {
+  title: "Promise, Axios",
+  description: "",
+  date: "2023-03-21",
+  category: "JavaScript",
+  tags: ["JavaScript", "Promise", "Axios", "HTTP Client", "Async"],
+  published: true,
+};
+
+##### 프로미스   
+비동기 작업의 최종 성공 또는 실패를 나타내는 객체   
+1. Promise.resolve(function,function), Promise.reject()   
+즉시 성공 또는 실패하는 프로미스 생성   
+1번째 인자 성공 시 함수, 2번째 인자 실패 시 함수   
+2. Promise.all()   
+둘중 하나라도 실패하면 전체 실패처리   
+3. Promise.race()   
+가장 먼저 성공 또는 실패한 결과 반환   
+4. Promise.allSettled    
+여러 프로미스를 병렬적으로 처리하되, 하나의 프로미스가 실패해도 무조건 이행    
+5. Promise.any   
+하나라도 성공할 경우 실행 완료, 아닐 경우 모든 프로미스가 실패할 때까지 계속    
+   
+Promise.finally()     
+프로미스가 완료될 때 호출할 콜백 등록      
+   
+##### Axios     
+Axios    
+node.js와 브라우저를 위한 Promise 기반 HTTP 클라이언트    
+    
+axios 사용법       
+1. axios(config)   
+```
+//get
+axios({
+  method: 'get',
+  url: 'http://example.com',
+})
+  .then(function (response) {
+    console.log(response);
+  });
+
+//post
+axios({
+  method: 'post',
+  url: '/user',
+  data: {
+    name: 'kyb'
+  }
+});
+```
+2. 요청 메소드 명령어    
+```
+axios.get('http://example.com')
+	.then(function (response) {
+    		console.log(response);
+  	});
+axios.post('/user', { name: 'kyb'});
+```
+     
+인스턴스 생성     
+axios.create     
+```
+const instance = axios.create({
+  baseURL: 'https://example.com/api/',
+  timeout: 1000,
+  headers: {
+        accept: 'application/json',
+  },
+});
+```
+
+인터셉터   
+then 또는 catch로 처리되기 전에 요청과 응답을 가로챔
+1. 요청   
+```
+axios.interceptors.request.use((config) => {
+	// 요청이 전달되기 전에 작업 수행
+    	return config;
+    }, (err) => {
+	    // 요청 오류가 있는 작업 수행
+        return Promise.reject(err);
+    }
+);
+```
+2. 응답     
+```
+axios.interceptors.response.use((response)=> {
+    // 응답 데이터가 있는 작업 수행
+    return response;
+  }, (error)=> {
+        // 응답 오류가 있는 작업 수행
+        return Promise.reject(error);
+  }
+);
+```

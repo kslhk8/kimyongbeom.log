@@ -1,0 +1,22 @@
+export const metadata = {
+  title: "key, fetch",
+  description: "",
+  date: "2022-03-29",
+  category: "React",
+  tags: ["key", "fetch", "Network"],
+  published: true,
+};
+
+##### key   
+key는 value를 특정하는 이름   
+key를 제대로 설정해야 재사용이 용이하다.   
+중복없고, 바뀌지않는 값으로 설정한다.    
+재배열 될 경우 index는 사용하면 안된다.   
+   
+##### fetch   
+네트워크 통신 도구   
+```
+fetch(url, options)
+  .then((response) => console.log("response:", response))
+  .catch((error) => console.log("error:", error));
+```
