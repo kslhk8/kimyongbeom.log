@@ -1,0 +1,64 @@
+export const metadata = {
+  title: "Babel",
+  description:
+    "",
+  date: "2023-10-11",
+  category: "JavaScript",
+  tags: [
+    "Babel",
+    "Transpiler",
+  ],
+  published: true,
+};
+
+##### Babel   
+자바스크립트 컴파일러   
+ECMAScript 2015+ 코드를 현재 및 이전 브라우저 또는 환경에서 이전 버전과 호환되는 JavaScript 버전으로 변환   
+JSX 구문 변환 할 수 있음
+   
+##### @babel/core   
+Babel의 핵심 기능이 담겨있는 라이브러리     
+   
+##### @babel/cli   
+터미널에서 babel을 사용할 수 있게 해주는 도구
+   
+src 디렉터리 내의 모든 자바스크립트 파일을 변환하여 dist 디렉토리에 저장   
+```
+npx babel src --out-dir dist
+```
+   
+##### @babel/preset-env   
+최신의 Javascript를 대상 환경에 필요한 문법 변환을 일일이 마이크로매니징하지 않고 가능하게 하는것   
+   
+targets: 타깃 브라우저에 필요한 플러그인만 삽입하도록 설정하는 옵션, 없을 경우 모든 ES2015+ 변환   
+    
+useBuiltIns   
+폴리필 삽입 방식을 설정하는 옵션   
+1. entry: core-js/stable과 regenerator-runtime/runtime 모듈을 전역 스코프에 직접 삽입한 경우에만 가능, polyfill을 direct로 import 할 수 있다.
+2. usage: 실제 사용한 폴리필만 삽입     
+3. false: 파일별로 자동으로 폴리필 추가 X, 필요한 폴리필을 직접 import해야함
+   
+corejs   
+삽입되는 core-js 모듈의 버전을 설정     
+※useBuiltIns와 함께 사용해야함   
+
+babel.config.json   
+```
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "edge": "17",
+          "firefox": "60",
+          "chrome": "67",
+          "safari": "11.1"
+        },
+        "useBuiltIns":"usage", 
+        "corejs":3
+      }
+    ]
+  ]
+}
+```

@@ -1,0 +1,127 @@
+export const metadata = {
+  title: "Explanation, ISR, On-demand revalidate",
+  description: "",
+  date: "2022-04-28",
+  category: "Next.js",
+  tags: ["Next.js", "SSR", "ISR", "Revalidation", "Pre-rendering"],
+  published: true,
+};
+
+##### React 단점    
+기본적으로 클라이언트 사이드(CSR)에서 작동함   
+=> SEO 효과가 거의 없음     
+=> 초기 로딩 시간이 김    
+   
+##### Next
+Vercel이 만든 React Framework   
+라이브러리 표방한 React 장점 + 다양한 편의 기능 추가한 Framework   
+＃vercel   
+fronted deploy platform   
+   
+##### 주요 기능   
+1. 각종 Optimization   
+2. Hot code Reloading
+3. Automatic Routing
+4. Automatic Code Splitting
+5. Prefetching
+6. Dynamic Components import
+7. Static Exports
+   
+##### SSR(server side rendering)   
+클라이언트로 전달될 HTML 일부를 미리 그려서 내려주는 것   
+클라이언트 렌더링 속도를 빠르게 하여, 사용자 체감 속도 증진   
+검색 엔진이 JavaSCript를 실행하지않고 크롤링 가능   
+   
+#### 생성     
+```
+npx create-next-app
+```
+   
+CSR만 동작하는 경우와 그렇지 않은 경우 비교   
+Chrome에서 Javascript disable 시키고 비교   
+   
+##### Pre-rendering     
+next는 기본적으로 모든 페이지를 pre-rendering   
+#hydration   
+html 로드하고 js 실행으로 interactive 할 준비 과정   
+1. ServerSideGeneration   
+getStaticProps   
+build time에 prerendering을 한다.   
+data가 바뀌지 않을 경우 사용   
+ex) Marketing pages, Blog Posts, Help and documentation   
+   
+2. ServerSideRendering   
+getServerSideProps   
+페이지 요청시 prerendering을 한다.     
+   
+##### window, document not defined 이슈   
+SSR을 기본으로 하기 때문에 서버에서 렌더링 하는 시점에선 window, document에 접근할 수 없다.
+   
+해결방법   
+1. React.useEffect 훅   
+렌더링 이후에 호출되기때문에 클라이언트 사이드에서 동작함을 보장한다.
+```
+useEffect(()=>{
+    //window, document 객체 접근
+},[]);
+```    
+   
+2. typeof 연산자   
+```
+const side = typeof window === 'undefined' ? 'server' : 'client'
+```
+   
+3. next/dynamic   
+ssr: false 옵션을 통해 클라이언트에서 코드를 실행한다고 명시
+```
+const DynamicComponent = dynamic(
+    ()=> import('../components/DynamicComponent'),
+    { ssr: false });
+```
+   
+##### getStaticPaths    
+어떤 path들에 대해서 정적 페이지 생성을 할지 정하는 함수   
+반환객체로 paths, fallback 반드시 포함해야함   
+    
+paths   
+어떤 path의 페이지들을 빌드 타임에 생성할지 정하는 배열   
+각각의 params 값은 페이지 이름에 있는 파라미터와 일치해야함   
+   
+fallback   
+false: getStaticPaths가 반환하지 않은 모든 path에 대해서 404 페이지를 반환     
+true: fallback → 페이지 반환 (같은 path로 온 이후 요청들에 대해서는 이때 생성한 페이지를 반환)     
+blocking: SSR과 동일하게 HTML이 생성될 때까지 기다린후 페이지 반환, 향후 요청을 위해 캐시됨   
+   
+##### ISR 
+전체 사이트를 재구축할 필요 없이 페이지별로 정적 생성을 사용할 수 있음(SSG 단점 보완)   
+revalidate 옵션을 통해 revalidate값(시간) 후에 해당 페이지에 대해서 정적 생성을 진행한다     
+   
+※재요청이 없을 경우 새로 빌드하지 않음   
+   
+##### On-demand Revalidation   
+revalidation을 위한 trigger가 발생될 때 데이터 갱신
+※12.2.0 버전 이후로 정상적으로 사용 가능   
+
+순서   
+1. secret token 생성 및 환경 변수에 저장   
+2. pages/api/revalidate.js
+```
+export default async function handler(req, res) {
+  // Check for secret to confirm this is a valid request
+  if (req.query.secret !== process.env.MY_SECRET_TOKEN) {
+    return res.status(401).json({ message: 'Invalid token' })
+  }
+ 
+  try {
+    await res.revalidate('/path-to-revalidate')
+    return res.json({ revalidated: true })
+  } catch (err) {
+    return res.status(500).send('Error revalidating')
+  }
+}
+```
+3. production mode에서 확인   
+```
+next build
+next start
+```
