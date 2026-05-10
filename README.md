@@ -140,3 +140,6 @@ export const metadata = {
 
 - `description`이 없으면 본문을 기반으로 요약을 자동 생성
 - `published: false`로 설정하면 게시글 목록과 상세 페이지에서 제외
+
+## 배포
+- Vercel: https://kimyongbeom-log.vercel.app
