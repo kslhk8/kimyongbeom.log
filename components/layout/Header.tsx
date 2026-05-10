@@ -8,11 +8,6 @@ export function Header() {
           <Link href="/" className="text-[22px] font-bold tracking-tight text-primary">
             kimyongbeom.log
           </Link>
-          {/* <nav className="hidden items-center gap-5 text-sm text-zinc-600 md:flex">
-            <Link href="/" className="transition hover:text-zinc-950">
-              Home
-            </Link>
-          </nav> */}
         </div>
 
         <div className="flex items-center gap-4">
