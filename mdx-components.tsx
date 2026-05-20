@@ -37,7 +37,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		h4: ({ className, ...props }: ComponentPropsWithoutRef<"h4">) => (
 			<h4
 				className={cn(
-					"mt-8 scroll-m-20 text-xl font-semibold tracking-tight text-primary",
+					"mt-6 scroll-m-20 text-[18px] font-semibold tracking-tight text-primary",
 					className,
 				)}
 				{...props}
