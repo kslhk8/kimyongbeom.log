@@ -46,6 +46,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 	return (
 		<div className="mx-auto rounded-2xl border border-default bg-card px-6 py-8 sm:px-10 sm:py-10">
 			<article className="max-w-none">
+				<header className="mb-12 space-y-2 border-b border-[#f1e6c8] pb-5">
+					<h2 className="text-3xl font-bold tracking-tight text-primary">
+						{post.title}
+					</h2>
+					<time className="block text-sm text-subtle">{post.date}</time>
+				</header>
 				<Content />
 			</article>
 			<PostNavigation prev={prev} next={next} />
