@@ -127,3 +127,39 @@ export const getPostsByCategory = async (category: string): Promise<Post[]> => {
 		(post) => post.category.toLowerCase() === normalizedCategory,
 	);
 };
+
+export const searchPosts = async (query: string): Promise<Post[]> => {
+	if (!query.trim()) {
+		return getAllPosts();
+	}
+
+	const postFileNames = fs
+		.readdirSync(POSTS_DIR)
+		.filter((fileName) => fileName.endsWith(".mdx"));
+
+	const posts = await Promise.all(
+		postFileNames.map(async (fileName) => {
+			const slug = fileName.replace(/\.mdx$/, "");
+			const postModule = await loadPostModule(slug);
+
+			if (!postModule) {
+				return null;
+			}
+
+			const post = buildPost(slug, postModule.metadata, postModule.source);
+			const normalizedQuery = query.toLowerCase();
+			const titleMatch = post.title.toLowerCase().includes(normalizedQuery);
+			const contentMatch = postModule.source
+				.toLowerCase()
+				.includes(normalizedQuery);
+
+			if (titleMatch || contentMatch) {
+				return post;
+			}
+
+			return null;
+		}),
+	);
+
+	return posts.filter(isPublishedPost).sort(sortPostsByDateDesc);
+};
