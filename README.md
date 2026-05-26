@@ -50,6 +50,8 @@ npm run start
 │  │  │  ├─category
 │  │  │  │  └─[category]
 │  │  │  │     └─page.tsx
+│  │  │  ├─search
+│  │  │  │  └─page.tsx
 │  │  │  ├─layout.tsx
 │  │  │  └─page.tsx
 │  │  └─[slug]
