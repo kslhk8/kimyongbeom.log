@@ -95,7 +95,7 @@ export const buildPost = (
 });
 
 export const isPublishedPost = (post: Post | null): post is Post =>
-	post !== null && post.published;
+	!!post?.published;
 
-export const sortPostsByDateDesc = (left: Post, right: Post) =>
+export const sortPostsByDateDesc = (left: Post, right: Post): number =>
 	new Date(right.date).getTime() - new Date(left.date).getTime();
