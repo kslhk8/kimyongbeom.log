@@ -20,7 +20,8 @@ export function PostNavigation({ prev, next }: PostNavigationProps) {
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
-							aria-label="이전"
+							aria-hidden="true"
+							focusable="false"
 						>
 							<path
 								strokeLinecap="round"
@@ -51,7 +52,8 @@ export function PostNavigation({ prev, next }: PostNavigationProps) {
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
-							aria-label="다음"
+							aria-hidden="true"
+							focusable="false"
 						>
 							<path
 								strokeLinecap="round"

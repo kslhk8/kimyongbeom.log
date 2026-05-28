@@ -12,7 +12,7 @@ function getPageHref(
 	page: number,
 	queryParams?: Record<string, string>,
 ) {
-	const params = new URLSearchParams(queryParams);
+	const params = new URLSearchParams(queryParams ?? {});
 	if (page > 1) {
 		params.set("page", String(page));
 	}
@@ -60,6 +60,8 @@ export function Pagination({
 						strokeWidth="2"
 						strokeLinecap="round"
 						strokeLinejoin="round"
+						aria-hidden="true"
+						focusable="false"
 					>
 						<polyline points="15 18 9 12 15 6" />
 					</svg>
@@ -76,6 +78,8 @@ export function Pagination({
 						strokeWidth="2"
 						strokeLinecap="round"
 						strokeLinejoin="round"
+						aria-hidden="true"
+						focusable="false"
 					>
 						<polyline points="15 18 9 12 15 6" />
 					</svg>
@@ -119,6 +123,8 @@ export function Pagination({
 						strokeWidth="2"
 						strokeLinecap="round"
 						strokeLinejoin="round"
+						aria-hidden="true"
+						focusable="false"
 					>
 						<polyline points="9 18 15 12 9 6" />
 					</svg>
@@ -135,6 +141,8 @@ export function Pagination({
 						strokeWidth="2"
 						strokeLinecap="round"
 						strokeLinejoin="round"
+						aria-hidden="true"
+						focusable="false"
 					>
 						<polyline points="9 18 15 12 9 6" />
 					</svg>

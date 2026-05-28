@@ -66,7 +66,7 @@ export function Header() {
 									setIsSearchOpen(false);
 									setQuery("");
 								}}
-								className="text-muted transition hover:text-primary"
+								className="text-muted transition hover:text-primary cursor-pointer"
 								aria-label="Close search"
 							>
 								<svg
@@ -92,7 +92,7 @@ export function Header() {
 							<button
 								type="button"
 								onClick={() => setIsSearchOpen(true)}
-								className="text-muted transition hover:text-primary"
+								className="text-muted transition hover:text-primary cursor-pointer"
 								aria-label="Search"
 							>
 								<svg

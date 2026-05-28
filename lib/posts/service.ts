@@ -133,6 +133,8 @@ export const searchPosts = async (query: string): Promise<Post[]> => {
 		return getAllPosts();
 	}
 
+	const normalizedQuery = query.toLowerCase();
+
 	const postFileNames = fs
 		.readdirSync(POSTS_DIR)
 		.filter((fileName) => fileName.endsWith(".mdx"));
@@ -147,7 +149,6 @@ export const searchPosts = async (query: string): Promise<Post[]> => {
 			}
 
 			const post = buildPost(slug, postModule.metadata, postModule.source);
-			const normalizedQuery = query.toLowerCase();
 			const titleMatch = post.title.toLowerCase().includes(normalizedQuery);
 			const contentMatch = postModule.source
 				.toLowerCase()
