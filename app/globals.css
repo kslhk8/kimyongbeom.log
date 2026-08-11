@@ -1,132 +1,153 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2');
-  font-weight: 100;
-  font-display: swap;
+	font-family: "Pretendard";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2")
+		format("woff2");
+	font-weight: 100;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraLight.woff2') format('woff2');
-  font-weight: 200;
-  font-display: swap;
+	font-family: "Pretendard";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraLight.woff2")
+		format("woff2");
+	font-weight: 200;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2');
-  font-weight: 300;
-  font-display: swap;
+	font-family: "Pretendard";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2")
+		format("woff2");
+	font-weight: 300;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-display: swap;
+	font-family: "Pretendard";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2")
+		format("woff2");
+	font-weight: 400;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-display: swap;
+	font-family: "Pretendard";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2")
+		format("woff2");
+	font-weight: 500;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2');
-  font-weight: 600;
-  font-display: swap;
+	font-family: "Pretendard";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2")
+		format("woff2");
+	font-weight: 600;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-display: swap;
+	font-family: "Pretendard";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2")
+		format("woff2");
+	font-weight: 700;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2') format('woff2');
-  font-weight: 800;
-  font-display: swap;
+	font-family: "Pretendard";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2")
+		format("woff2");
+	font-weight: 800;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2') format('woff2');
-  font-weight: 900;
-  font-display: swap;
+	font-family: "Pretendard";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2")
+		format("woff2");
+	font-weight: 900;
+	font-display: swap;
 }
 
 :root {
-  --background: #FFF8E7;
-  --foreground: #343538;
+	--background: #fff8e7;
+	--foreground: #343538;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: Pretendard, ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: var(--font-geist-mono);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--font-sans: Pretendard, ui-sans-serif, system-ui, -apple-system, sans-serif;
+	--font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+	:root {
+		--background: #0a0a0a;
+		--foreground: #ededed;
+	}
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Pretendard', sans-serif;
+	background: var(--background);
+	color: var(--foreground);
+	font-family: "Pretendard", sans-serif;
 }
 
 .bg-primary {
-  background-color: #FFF8E7;
+	background-color: #fff8e7;
 }
 
 .bg-card {
-  background-color: #FFFBF0;
+	background-color: #fffbf0;
 }
 
 .bg-active {
-  background-color: #FBEECC;
+	background-color: #fbeecc;
 }
 
 .bg-hover {
-  background-color: #FFF3D6;
+	background-color: #fff3d6;
 }
 
 .bg-header {
-  background-color: rgba(255, 255, 255, 0.8);
+	background-color: rgba(255, 255, 255, 0.8);
 }
 
 .text-primary {
-  color: rgb(9 9 11);
+	color: rgb(9 9 11);
 }
 
 .text-secondary {
-  color: rgb(24 24 27);
+	color: rgb(24 24 27);
 }
 
 .text-muted {
-  color: rgb(82 82 91);
+	color: rgb(82 82 91);
 }
 
 .text-subtle {
-  color: rgb(161 161 170);
+	color: rgb(161 161 170);
 }
 
 .border-default {
-  border-color: rgba(228, 228, 231, 0.8);
+	border-color: rgba(228, 228, 231, 0.8);
 }
 .divide-default {
-  color:#e4e4e7cc
+	color: #e4e4e7cc;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
 }

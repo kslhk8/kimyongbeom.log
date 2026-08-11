@@ -1,55 +1,164 @@
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState, useRef, useEffect } from "react";
 
 export function Header() {
-  return (
-    <header className="border-b border-default bg-header backdrop-blur">
-      <div className="mx-auto flex h-[60px] w-full max-w-[1280px] items-center justify-between px-5 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-6">
-          <Link href="/" className="text-[22px] font-bold tracking-tight text-primary">
-            kimyongbeom.log
-          </Link>
-        </div>
+	const router = useRouter();
+	const [isSearchOpen, setIsSearchOpen] = useState(false);
+	const [query, setQuery] = useState("");
+	const inputRef = useRef<HTMLInputElement>(null);
 
-        <div className="flex items-center gap-4">
-          <a
-            href="mailto:kslhk8@gmail.com"
-            className="text-muted transition hover:text-primary"
-            aria-label="Email"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect x="2" y="4" width="20" height="16" rx="2" />
-              <path d="m2 7 10 7 10-7" />
-            </svg>
-          </a>
-          <a
-            href="https://github.com/kslhk8"
-            target="_blank"
-            rel="noreferrer"
-            className="text-muted transition hover:text-primary"
-            aria-label="GitHub"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </header>
-  );
+	useEffect(() => {
+		if (isSearchOpen) {
+			inputRef.current?.focus();
+		}
+	}, [isSearchOpen]);
+
+	useEffect(() => {
+		const handleEscape = (e: KeyboardEvent) => {
+			if (e.key === "Escape" && isSearchOpen) {
+				setIsSearchOpen(false);
+				setQuery("");
+			}
+		};
+
+		document.addEventListener("keydown", handleEscape);
+		return () => document.removeEventListener("keydown", handleEscape);
+	}, [isSearchOpen]);
+
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+		if (query.trim()) {
+			router.push(`/blog/search?q=${encodeURIComponent(query.trim())}`);
+			setIsSearchOpen(false);
+			setQuery("");
+		}
+	};
+
+	return (
+		<header className="border-b border-default bg-header backdrop-blur">
+			<div className="mx-auto flex h-[60px] w-full max-w-[1280px] items-center justify-between px-5 sm:px-6 lg:px-8">
+				<div className="flex items-center gap-6">
+					<Link
+						href="/"
+						className="text-[22px] font-bold tracking-tight text-primary"
+					>
+						kimyongbeom.log
+					</Link>
+				</div>
+
+				<div className="flex items-center gap-4">
+					{isSearchOpen ? (
+						<form onSubmit={handleSubmit} className="flex items-center gap-2">
+							<input
+								ref={inputRef}
+								type="text"
+								value={query}
+								onChange={(e) => setQuery(e.target.value)}
+								placeholder="포스트 검색..."
+								className="w-[240px] sm:w-[300px] px-3 py-1.5 text-sm rounded-md border border-default bg-white text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-muted-foreground/30 transition-colors"
+							/>
+							<button
+								type="button"
+								onClick={() => {
+									setIsSearchOpen(false);
+									setQuery("");
+								}}
+								className="text-muted transition hover:text-primary cursor-pointer"
+								aria-label="Close search"
+							>
+								<svg
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									xmlns="http://www.w3.org/2000/svg"
+									aria-hidden="true"
+								>
+									<title>Close</title>
+									<line x1="18" y1="6" x2="6" y2="18" />
+									<line x1="6" y1="6" x2="18" y2="18" />
+								</svg>
+							</button>
+						</form>
+					) : (
+						<>
+							<button
+								type="button"
+								onClick={() => setIsSearchOpen(true)}
+								className="text-muted transition hover:text-primary cursor-pointer"
+								aria-label="Search"
+							>
+								<svg
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									xmlns="http://www.w3.org/2000/svg"
+									aria-hidden="true"
+								>
+									<title>Search</title>
+									<circle cx="11" cy="11" r="8" />
+									<path d="m21 21-4.35-4.35" />
+								</svg>
+							</button>
+							<a
+								href="mailto:kslhk8@gmail.com"
+								className="text-muted transition hover:text-primary"
+								aria-label="Email"
+							>
+								<svg
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									xmlns="http://www.w3.org/2000/svg"
+									aria-hidden="true"
+								>
+									<title>Email</title>
+									<rect x="2" y="4" width="20" height="16" rx="2" />
+									<path d="m2 7 10 7 10-7" />
+								</svg>
+								<span className="sr-only">Email</span>
+							</a>
+							<a
+								href="https://github.com/kslhk8"
+								target="_blank"
+								rel="noreferrer"
+								className="text-muted transition hover:text-primary"
+								aria-label="GitHub"
+							>
+								<svg
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="currentColor"
+									xmlns="http://www.w3.org/2000/svg"
+									aria-hidden="true"
+								>
+									<title>GitHub</title>
+									<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+								</svg>
+								<span className="sr-only">GitHub</span>
+							</a>
+						</>
+					)}
+				</div>
+			</div>
+		</header>
+	);
 }
